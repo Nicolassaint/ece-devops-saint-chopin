@@ -20,7 +20,7 @@ describe("User REST API", () => {
   describe("POST /user", () => {
     it("create a new user", (done) => {
       const user = {
-        username: "sergkudinov",
+        username: "sergkudinov", 
         firstname: "Sergei",
         lastname: "Kudinov",
       };
