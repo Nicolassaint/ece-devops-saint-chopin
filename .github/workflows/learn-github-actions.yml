@@ -21,9 +21,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: 'yarn.lock'
-    - run: yarn install --frozen-lockfile
-    - run: yarn test
+    - name: Install dependencies
+      run: npm ci
+    - run: npm test
     
     
   deploy:
