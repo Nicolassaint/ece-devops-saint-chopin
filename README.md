@@ -62,7 +62,7 @@ From the root directory of the project, run:
 npm test
 ```
 
-## Author
+## Authors
 
-Sergei Kudinov   
-sergei@adaltas.com
+Nicolas Saint
+Thomas Chopin
