@@ -37,5 +37,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "ece-devops-cicd" 
           heroku_email: "nicolas.saint78@gmail.com"
-          branch: lab4
+          branch: origin/lab4
 
