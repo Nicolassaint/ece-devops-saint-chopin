@@ -15,8 +15,8 @@ spec:
         app: nginx-empty-dir
     spec:
       volumes:
-      - name: cache-volume
-        emptyDir: {}
+      -   name : cache-volume
+          emptyDir : {}
         # TODO complete
       containers:
       - name: nginx-container
@@ -25,6 +25,6 @@ spec:
           - containerPort: 80
             name: "http-server"
         volumeMounts:
-        - mountPath: /cache
-          name: cache-volume
           # TODO complete
+        - mountPath : /cache
+          name : cache-volume

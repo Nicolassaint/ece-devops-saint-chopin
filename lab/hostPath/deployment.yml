@@ -19,15 +19,14 @@ spec:
         - name: test-volume
           hostPath:
             # directory location on host
-            path: /data
-            type: Directory
+            path: /mnt/hostPath/
       containers:
-        - name: nginx-container
-          image: nginx
-          ports:
-            - containerPort: 80
-              name: "http-server"
-          volumeMounts:
-            # TODO complete
-            - mountPath: /mnt/hostPath
-              name: test-volume
+      - name: nginx-container
+        image: nginx
+        ports:
+          - containerPort: 80
+            name: "http-server"
+        volumeMounts:
+          # TODO complete
+          - mountPath: /test-pd
+            name: test-volume
