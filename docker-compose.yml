@@ -5,16 +5,18 @@ services:
     volumes:
       - db-data:/data
   web:
-    # COMPLETE HERE
+    depends_on:
+      - redis
     build: .
     container_name: project-devops
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "8080:8080"
+      - "3000:3000"
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
 volumes:
   db-data:

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-devops
+  labels:
+    app: project-devops
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: project-devops
+  template:
+    metadata:
+      labels:
+        app: project-devops
+    spec:
+      containers:
+        - name: project-devops
+          image: nicolassaint/project-image
+          resources:
+            limits:
+              memory: '1Gi'
+              cpu: '1000m'
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - mountPath: /var/lib/redis/
+              name: redis-volume
+      volumes:
+        - name: redis-volume
+          persistentVolumeClaim:
+            claimName: redis-pv-claim
