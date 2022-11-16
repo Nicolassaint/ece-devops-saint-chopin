@@ -16,13 +16,25 @@ spec:
     spec:
       containers:
         - name: project-devops
-          image: nicolassaint/project-image
+          image: nicolassaint/project-image:latest
+          imagePullPolicy: IfNotPresent
           resources:
             limits:
               memory: '1Gi'
               cpu: '1000m'
           ports:
             - containerPort: 3000
+          volumeMounts:
+            - mountPath: /var/lib/redis/
+              name: redis-volume
+        - name: redis-deploy
+          image: redis
+          resources:
+            limits:
+              memory: '1Gi'
+              cpu: '1000m'
+          ports:
+            - containerPort: 6379
           volumeMounts:
             - mountPath: /var/lib/redis/
               name: redis-volume
