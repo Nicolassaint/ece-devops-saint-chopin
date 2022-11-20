@@ -26,7 +26,7 @@ spec:
             - containerPort: 3000
           volumeMounts:
             - mountPath: /var/lib/redis/
-              name: redis-volume
+              name: task-pv-storage
         - name: redis-deploy
           image: redis
           resources:
@@ -37,8 +37,9 @@ spec:
             - containerPort: 6379
           volumeMounts:
             - mountPath: /var/lib/redis/
-              name: redis-volume
+              name: task-pv-storage
+
       volumes:
-        - name: redis-volume
+        - name: task-pv-storage
           persistentVolumeClaim:
             claimName: redis-pv-claim
