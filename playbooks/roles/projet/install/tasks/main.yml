@@ -1,0 +1,66 @@
+---
+#install and enable redis
+- name: Install redis
+  yum:
+    name: redis
+    state: latest
+
+#install node and npm
+- name: install node and npm
+  yum:
+    name: nodejs
+
+- name: Install required packages
+  yum:
+    name:
+      - curl
+      - policycoreutils-python
+      - openssh-server
+    state: latest
+
+- name: Install postfix
+  yum:
+    name: postfix
+    state: latest
+
+- name: Enable and start redis
+  service:
+    name: redis
+    state: started
+    enabled: yes
+
+- name: Enable and start sshd
+  service:
+    name: sshd
+    state: started
+    enabled: yes
+
+- name: Enable HTTP+HTTPS access
+  firewalld:
+    # This is how we use a variable
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  # The module will be run for each item
+  with_items:
+    - http
+    - https
+
+- name: Reload firewalld
+  service:
+    name: firewalld
+    state: reloaded
+
+- name: Enable and start postfix
+  service:
+    name: postfix
+    state: started
+    enabled: yes
+
+
+- name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+  copy:
+    src: /vagrant
+    dest: /opt  # link to /path/to/file
+    follow: yes
+  become: true

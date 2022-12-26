@@ -1,0 +1,11 @@
+---
+- hosts: server
+  # Run commands as root
+  become: true
+  # Roles to be executed on these hosts
+  roles:
+  - role: projet/install
+    tags: install
+
+  - role: projet/healthchecks
+    tags: check
