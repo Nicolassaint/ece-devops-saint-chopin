@@ -62,28 +62,28 @@ describe("User REST API", () => {
 
   describe("GET /user", () => {
     // TODO Create test for the get method
-    it("create a new user", (done) => {
-      const user = {
-        username: "sergkudinov",
-        firstname: "Sergei",
-        lastname: "Kudinov",
-      };
+    // it("create a new user", (done) => {
+    //   const user = {
+    //     username: "sergkudinov",
+    //     firstname: "Sergei",
+    //     lastname: "Kudinov",
+    //   };
 
-      userController.create(user, () => {
-        chai
-          .request(app)
-          .get("/user/"+user.username)
-          .then((res) => {
-            chai.expect(res).to.have.status(200);
-            chai.expect(res.body.status).to.equal("Succès");
-            chai.expect(res).to.be.json;
-            done();
-          })
-          .catch((err) => {
-            throw err;
-          });
-      });
-    });
+    //   userController.create(user, () => {
+    //     chai
+    //       .request(app)
+    //       .get("/user/"+user.username)
+    //       .then((res) => {
+    //         chai.expect(res).to.have.status(200);
+    //         chai.expect(res.body.status).to.equal("Succès");
+    //         chai.expect(res).to.be.json;
+    //         done();
+    //       })
+    //       .catch((err) => {
+    //         throw err;
+    //       });
+    //   });
+    // });
 
     it("pass wrong parameters", (done) => {
       const user = {

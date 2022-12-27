@@ -23,7 +23,7 @@ jobs:
       - name: Start Redis
         uses: supercharge/redis-github-action@1.4.0
 
-      - name: npm install and build
+      - name: npm install and test
         run: |
           npm ci
           npm test
