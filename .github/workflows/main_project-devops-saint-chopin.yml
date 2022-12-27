@@ -5,33 +5,30 @@ name: Build and deploy Node.js app to Azure Web App - Project-devops-saint-chopi
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
-
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        redis-version: [5.x]
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - name: Start Redis
+      uses: supercharge/redis-github-action@1.4.0
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
+    - run: npm test
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
-        with:
-          node-version: '16.x'
-
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: node-app
-          path: .
 
   deploy:
     runs-on: ubuntu-latest
