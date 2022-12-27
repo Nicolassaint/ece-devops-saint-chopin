@@ -19,11 +19,11 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.use('/user', userRouter)
 
-app.get('/health', (req, res) => res.send('Health ok!'))
+// app.get('/health', (req, res) => res.send('Health ok!'))
 
-app.use('/readiness', (req, res) => res.send('Readiness ok!'))
+// app.use('/readiness', (req, res) => res.send('Readiness ok!'))
 
-app.use('/liveness', (req, res) => res.send('Liveness ok!'))
+// app.use('/liveness', (req, res) => res.send('Liveness ok!'))
 
 const server = app.listen(port, (err) => {
   if (err) throw err

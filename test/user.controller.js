@@ -45,15 +45,15 @@ describe("User", () => {
       };
       userController.create(user, () => {
 
-        userController.create(user, (err,result) => {
+        userController.create(user, (err, result) => {
 
-        expect(err).to.not.be.equal(null);
-        expect(result).to.be.equal(null);
-        done();
+          expect(err).to.not.be.equal(null);
+          expect(result).to.be.equal(null);
+          done();
         })
       });
 
-    
+
     });
   });
 
@@ -78,7 +78,7 @@ describe("User", () => {
         });
       });
     });
-    
+
 
     it("cannot get a user when it does not exist", (done) => {
       // Check si l'utilisateur est valide
