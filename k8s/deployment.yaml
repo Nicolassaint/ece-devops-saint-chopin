@@ -42,4 +42,4 @@ spec:
       volumes:
         - name: task-pv-storage
           persistentVolumeClaim:
-            claimName: redis-pv-claim
+            claimName: task-pv-claim
