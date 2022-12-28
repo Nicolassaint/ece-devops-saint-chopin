@@ -121,19 +121,19 @@ SI Group 6
 
     First of all,we launch docker,kubernetes and minikude with `minikube start` to install a Kubernetes cluster using **Minikube**.
     Then we applay all our files to the cluster with :
-    - `kubectl apply -f deployment.yaml`
-    - `kubectl apply -f service.yaml`
-    - `kubectl apply -f pv-volume.yaml`
-    - `kubectl apply -f pv-claim.yaml`
-    - `kubectl apply -f storage-class.yaml`
+  - `kubectl apply -f deployment.yaml`
+  - `kubectl apply -f service.yaml`
+  - `kubectl apply -f pv-volume.yaml`
+  - `kubectl apply -f pv-claim.yaml`
+  - `kubectl apply -f storage-class.yaml`
 
     We check that everything is going well.
-    - `kubectl get deployments`
-    - `kubectl get services`
+  - `kubectl get deployments`
+  - `kubectl get services`
 
     ![get_services_deployment](./Assets/get_services_deployment.png)
 
-    - `kubectl get pods`
+  - `kubectl get pods`
 
     ![get_pods](./Assets/getpods.png)
 
@@ -153,30 +153,65 @@ SI Group 6
 
 - Istio
 
+    Before deploying our pods with istio we can see that 2/2 are ready.
+
     ![avant](./Assets/avant.png)
-    ![aprés](./Assets/après.png)
+
+    Then, after installing istio we configure it in our cluster to deploy our app with istio by injecting istio in our pods. We have to re apply our pods.
+
     ![config](./Assets/config1.png)
+
+    We now see that we have 3/3 running, one was added by istio.
+
+    ![aprés](./Assets/après.png)
+
+    You can see here that when we desribe our pod, istio is well injected.
+
     ![istioPod](./Assets/istioPod.png)
     ![istioPod2](./Assets/istioPod2.png)
 
+    For route requests & traffic shifting between 2 different versions of our app we have written following yaml config files
+
+  - [virtualservice.yaml](/istio/virtualservice.yaml)
+  - [gateway.yaml](/istio/gateway.yaml)
+  - [destinationrule.yaml](/istio/destinationrule.yaml)
+
+    Here, we have to use the route key in the spec field of our YAML file.
+
+    In this example, the virtualService resource routes incoming requests to the project-devops-service, with a weight of 50% for the v1 subset and a weight of 50% for the v2 subset. This will distribute incoming requests evenly between the two versions of the app.
+
 ### 8. Implement Monitoring to your containerized application
 
-- Grafana
-    ![grafana_connexion](./Assets/grafana_connexion.png)
-    ![grafana_pannel](./Assets/grafana_pannel.png)
-    ![grafana_prom](./Assets/grafana_prom.png)
+- Installation
+
+    First, we use the services and deployments of our monitoring tools from the istio installation folder
+
     ![installation2](./Assets/installation2.png)
+
+    We can see that the pods are running well
+
+    ![grafana_prom](./Assets/grafana_prom.png)
+
+- Grafana
+
+    We then have to deploy our pod to our localhost on the right port, here's the grafana deployment command
+
+    ![grafana_connexion](./Assets/grafana_connexion.png)
+
+    We are then on grafana. Unfortunatly, we didnt't have time to create alerts and trigger them by shutting down our applications.
+
+    ![grafana_pannel](./Assets/grafana_pannel.png)
+
 - Prometheus
-    ![menu_prom](./Assets/menu_prom.png)
+
+    For Prometheus, we use the same process
+
     ![prometheus](./Assets/prometheus.png)
+
+    We can now see that we're on prometheus UI
+
+    ![menu_prom](./Assets/menu_prom.png)
+
+    We can then check the status or our app tha is good
+
     ![status](./Assets/status2.png)
-
-## Instructions
-
-### Install
-
-### Use
-
-#### Useful links
-
-### Test
